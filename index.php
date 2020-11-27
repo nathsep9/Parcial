@@ -16,6 +16,7 @@ $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
 </head>
 
 <body>
+	<div class="fondo"></div>
 	<form method="post" method="POST" action="./registrar.php">
 		<h1>Ingresar panes</h1>
 		<input type="text" name="name" placeholder="Nombre completo">
@@ -23,29 +24,32 @@ $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
 		<input type="number" name="price" placeholder="Precio">
 		<input type="submit" name="register" value="Guardar">
 	</form>
-	<table class='table'>
-		<thead>
-			<tr>
-				<th>id</th>
-				<th>Nombre</th>
-				<th>Cantidad</th>
-				<th>Precio</th>
-			</tr>
-		</thead>
-		<tbody>
+	<div class="root">
+		<table class='table'>
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Nombre</th>
+					<th>Cantidad</th>
+					<th>Precio</th>
+				</tr>
+			</thead>
+			<tbody>
 
-			<?php
+				<?php
 
-			while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
-				echo "\t<tr>\n";
-				foreach ($line as $col_value) {
-					echo "\t\t<td>$col_value</td>\n";
+				while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
+					echo "\t<tr>\n";
+					foreach ($line as $col_value) {
+						echo "\t\t<td>$col_value</td>\n";
+					}
+					echo "\t</tr>\n";
 				}
-				echo "\t</tr>\n";
-			}
-			?>
-		</tbody>
-	</table>
+				?>
+			</tbody>
+		</table>
+	</div>
+
 </body>
 
 </html>
